@@ -85,15 +85,11 @@ export default function SidebarSocial({ colorMode }) {
               <div className="flex flex-col h-full">
                 <div className="flex items-center justify-between flex-shrink-0 px-4 pt-6 ">
                   <span className="inline-flex items-center gap-2">
-                    {/* <img
+                    <img
                       src={content.texts.navbar.solidLogo.img}
                       alt={content.texts.navbar.solidLogo.alt}
                       className="w-auto h-auto p-[5px] "
-                    /> */}
-                    <h1 className="text-title4 text-white">
-                      {" "}
-                      André Lima Advogado
-                    </h1>
+                    />
                   </span>
                   <span>
                     <Button
