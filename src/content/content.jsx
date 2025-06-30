@@ -126,18 +126,17 @@ const content = {
       miniTag: "ADVOGADO EM SÃO PAULO - SP",
       title: (
         <h1 className="mb-[16px]">
-          Sua conta travou. <br />
-          <span className="text-primary"> E agora?</span>
+          Sua conta bancária foi <br />
+          <span className="text-primary"> bloqueada?</span>
         </h1>
       ),
-      subtitle:
-        "Milhares enfrentam isso todos os dias. Descubra o que fazer antes que o pior aconteça.",
+      subtitle: "Atuação jurídica rápida e estratégica para desbloqueio.",
       heroImgPhone: heroImgPhone, // img da pessoa mobile
       heroDesktop: heroImgDesktop, //bg com foto da pessoa
       heroImg: bgHeroImg, //fundo da Hero
       heroDefaultImage: heroDefaultImg, //imagem da heroDefault Mobile
       backgroundPerson: backgroundPersonMobile,
-      ctaButtonText: "Quero desbloquear minha conta",
+      ctaButtonText: "Fale agora com um advogado especialista.",
       obsHero: {
         icon: (
           <svg
@@ -224,8 +223,9 @@ const content = {
       },
       card2: {
         img: featuresImg2,
-        title: "Defesa em Processos de Bloqueio Judicial",
-        subtitle: "Atuação judicial contra bloqueios e penhoras online",
+        title: "Defesa em Processos de Bloqueio",
+        subtitle:
+          "Atuação com agilidade para identificar a origem do bloqueio (Judicial, BacenJud, Sisbajud, Receita Federal, dívidas, etc.)",
         description: (
           <div>
             A_Definir
