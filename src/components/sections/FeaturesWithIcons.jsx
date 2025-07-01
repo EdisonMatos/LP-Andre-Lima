@@ -43,15 +43,6 @@ export default function FeaturesWithIcons({ colorMode }) {
                 colorMode={colorMode}
               />
             </MotionDivDownToUp>
-            <MotionDivDownToUp>
-              <IconFeatureCard
-                icon={content.texts.features.card2.icon}
-                title={content.texts.features.card2.title}
-                paragraph={content.texts.features.card2.subtitle}
-                className={textClass}
-                colorMode={colorMode}
-              />
-            </MotionDivDownToUp>
           </div>
 
           <MotionDivDownToUp className="hidden desktop1:flex justify-center w-[32%]">
@@ -65,6 +56,15 @@ export default function FeaturesWithIcons({ colorMode }) {
 
           <div className="col3 tablet1:w-[50%] desktop1:w-[28%] flex flex-col justify-center items-center">
             <MotionDivDownToUp>
+              <IconFeatureCard
+                icon={content.texts.features.card2.icon}
+                title={content.texts.features.card2.title}
+                paragraph={content.texts.features.card2.subtitle}
+                className={`tablet1:mb-[16px] desktop1:mb-0 desktop2:mb-[46px] ${textClass}`}
+                colorMode={colorMode}
+              />
+            </MotionDivDownToUp>
+            {/* <MotionDivDownToUp>
               <IconFeatureCard
                 icon={content.texts.features.card3.icon}
                 title={content.texts.features.card3.title}
@@ -81,7 +81,7 @@ export default function FeaturesWithIcons({ colorMode }) {
                 className={textClass}
                 colorMode={colorMode}
               />
-            </MotionDivDownToUp>
+            </MotionDivDownToUp> */}
           </div>
         </div>
       </SectionWrapper>
