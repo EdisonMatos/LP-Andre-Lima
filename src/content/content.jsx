@@ -56,7 +56,7 @@ export const infos = {
   name: "Dr. André Lima",
   email: "contato", // Email desejado pelo cliente
   emailSecundario: "A_Definir", // Email desejado pelo cliente
-  domain: "andrelimaadvogado.com.br", // Sem "www"
+  domain: "advandrelima.com.br", // Sem "www"
   phone: {
     ddd: "11",
     firstPart: "95684", // Apenas os 5 primeiros números (incluindo o 9)
