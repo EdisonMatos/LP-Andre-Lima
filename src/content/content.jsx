@@ -126,11 +126,15 @@ const content = {
       miniTag: "ADVOGADO EM SÃO PAULO - SP",
       title: (
         <h1 className="mb-[16px]">
-          Sua conta bancária foi <br />
-          <span className="text-primary"> bloqueada?</span>
+          Especialista em Cálculos <br />
+          <span className="text-primary">
+            {" "}
+            Trabalhistas, Liquidação e Execução
+          </span>
         </h1>
       ),
-      subtitle: "Atuação jurídica rápida e estratégica para desbloqueio.",
+      subtitle:
+        "Atuação técnica desde o ajuizamento da ação até a efetiva cobrança dos valores reconhecidos judicialmente — inclusive em parceria com escritórios e advogados em todo o Brasil.",
       heroImgPhone: heroImgPhone, // img da pessoa mobile
       heroDesktop: heroImgDesktop, //bg com foto da pessoa
       heroImg: bgHeroImg, //fundo da Hero
@@ -156,7 +160,7 @@ const content = {
             <path d="m16 18 2 2 4-4" />
           </svg>
         ),
-        text: "Atendimento exclusivamente online",
+        text: "Atendimento online",
       },
       ctaButtonAriaLabel:
         "Botão para chamada de ação para contato pelo whatsapp",
@@ -184,20 +188,20 @@ const content = {
     features: {
       miniTag: "ESPECIALIDADE",
       title: "Atuação focada em desbloqueio de contas",
-      subtitle:
-        "Soluções jurídicas para quem teve contas bloqueadas por bancos ou pela Justiça.",
+      subtitle: "",
       imgFeatures: imgFeatures,
       imgDivisor: imgDivisor,
       card1: {
         img: featuresImg1,
-        title: "Desbloqueio de Contas Bancárias",
-        subtitle: "Reativação do acesso a contas bancárias bloqueadas",
+        title: "Atuação completa em processos trabalhistas individuais",
+        subtitle: "",
         description: (
           <div>
-            A_Definir
-            <br />
-            <br />
-            A_Definir
+            • Entrevista e análise jurídica do caso;
+            <br />• Elaboração da petição inicial com cálculos precisos;
+            <br />• Participação em audiências e perícias técnicas;
+            <br />• Pleitos de verbas rescisórias, adicionais, estabilidade e
+            reparações.
           </div>
         ),
         imgModal: imgFeaturesCardModal1,
@@ -223,15 +227,17 @@ const content = {
       },
       card2: {
         img: featuresImg2,
-        title: "Defesa em Processos de Bloqueio",
-        subtitle:
-          "Atuação com agilidade para identificar a origem do bloqueio (Judicial, BacenJud, Sisbajud, Receita Federal, dívidas, etc.)",
+        title: "Cálculos Trabalhistas e Liquidação de Sentença",
+        subtitle: "",
         description: (
           <div>
-            A_Definir
-            <br />
-            <br />
-            A_Definir
+            • Cálculo para instrução da petição inicial;
+            <br />• Liquidação de sentença ;
+            <br />• Atualização de valores conforme jurisprudência;
+            <br />• Impugnação a cálculos apresentados pela parte contrária;
+            <br />• Laudos técnicos para apoio à decisão judicial;
+            <br />• Apontamento de diferenças e inconsistências em réplica (com
+            quadros comparativos e exposição fundamentada).
           </div>
         ),
         imgModal: imgFeaturesCardModal2,
@@ -260,13 +266,17 @@ const content = {
       },
       card3: {
         img: featuresImg3,
-        title: "Regularização de CPF ou CNPJ com Pendências",
-        subtitle: "Correção de dados que causam bloqueios bancários",
+        title: "Execução Trabalhista",
+        subtitle: "",
         description: (
           <div>
-            A_Definir <br />
-            <br />
-            A_Definir
+            • Elaboração de pedidos de cumprimento de sentença;
+            <br />• Acompanhamento da fase de execução até o recebimento;
+            <br />• Utilização de ferramentas como SISBAJUD, RENAJUD e Infojud;
+            • Impugnação de embargos à execução e manifestações da parte
+            contrária;
+            <br />• Estratégias para localização de bens e recebimento do
+            crédito.
           </div>
         ),
         imgModal: imgFeaturesCardModal3,
@@ -301,14 +311,16 @@ const content = {
       },
       card4: {
         img: featuresImg4,
-        title: "Negociação com Bancos e Instituições Financeiras",
-        subtitle: "Acordos e tratativas diretas com instituições bancárias",
+        title: "Apoio a Escritórios e Advogados",
+        subtitle: "",
         description: (
           <div>
-            A_Definir
-            <br />
-            A_Definir
-            <br />
+            Atuação como parceiro técnico em liquidação e execução:
+            <br />• Cálculos iniciais e de liquidação para instrução processual;
+            • Memoriais de cálculo e impugnações técnicas;
+            <br />• Apoio em execuções complexas, inclusive na fase de bloqueio
+            e levantamento de valores; • Atuação sob demanda, com discrição e
+            parceria profissional.
           </div>
         ),
         imgModal: imgFeaturesCardModal4,
@@ -402,42 +414,23 @@ const content = {
       miniTag: "QUEM É O DR. ANDRÉ LIMA",
       title: "Minha trajetória",
       subtitle:
-        "Compromisso com técnica, agilidade e resultados para desbloqueio de contas",
+        "Advogado com atuação especializada em Direito do Trabalho, com foco em cálculos judiciais, liquidação de sentença e fase de execução.",
       labelInstagram: "Siga-nos no Instagram",
       labelFacebook: "Siga-nos no Facebook",
       labelLinkedin: "Siga-nos no LinkedIn",
       labelX: "Siga-nos no X",
       paragraph: (
         <div>
-          O escritório nasceu com o propósito de oferecer uma advocacia técnica,
-          ágil e eficaz para quem enfrenta bloqueios bancários.
-          <br />A atuação é voltada a resultados concretos, com atendimento
-          direto e personalizado.
+          Atuo tanto em ações diretas contra empresas quanto em parceria com
+          outros profissionais do Direito, auxiliando tecnicamente na condução
+          de processos em fase avançada ou com questões complexas de cálculos.
+          <br />
+          Meu trabalho é técnico, ético e voltado à efetividade da Justiça para
+          o trabalhador.
         </div>
       ),
       buttonModalLabelAbout: "Continuar lendo",
-      modal: (
-        <p>
-          O escritório nasceu com o propósito de oferecer uma advocacia técnica,
-          ágil e eficaz para quem enfrenta bloqueios bancários.
-          <br />
-          <br />
-          A atuação é voltada a resultados concretos, com atendimento direto e
-          personalizado.
-          <br />
-          <br />
-          Com ampla experiência em processos de desbloqueio, o Dr. André Lima
-          alia estratégia jurídica, conhecimento técnico e agilidade processual
-          para garantir soluções rápidas e seguras aos clientes.
-          <br />
-          <br />
-          A missão é clara: tornar o Direito acessível, oferecendo segurança,
-          clareza e total comprometimento em cada caso, sempre com ética,
-          responsabilidade e foco no resultado.
-          <br />
-          <br />
-        </p>
-      ),
+      modal: <p></p>,
       ctaButtonAriaLabel: "Botão para entrar em contato",
       ctaButtonText: "Entre em contato",
 
