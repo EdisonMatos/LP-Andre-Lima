@@ -126,11 +126,15 @@ const content = {
       miniTag: "ADVOGADO EM SÃO PAULO - SP",
       title: (
         <h1 className="mb-[16px]">
-          Sua conta bancária foi <br />
-          <span className="text-primary"> bloqueada?</span>
+          Especialista em Cálculos <br />
+          <span className="text-primary">
+            {" "}
+            Trabalhistas, Liquidação e Execução
+          </span>
         </h1>
       ),
-      subtitle: "Atuação jurídica rápida e estratégica para desbloqueio.",
+      subtitle:
+        "Atuação técnica desde o ajuizamento da ação até a efetiva cobrança dos valores reconhecidos judicialmente — inclusive em parceria com escritórios e advogados em todo o Brasil.",
       heroImgPhone: heroImgPhone, // img da pessoa mobile
       heroDesktop: heroImgDesktop, //bg com foto da pessoa
       heroImg: bgHeroImg, //fundo da Hero
@@ -156,7 +160,7 @@ const content = {
             <path d="m16 18 2 2 4-4" />
           </svg>
         ),
-        text: "Atendimento exclusivamente online",
+        text: "Atendimento online",
       },
       ctaButtonAriaLabel:
         "Botão para chamada de ação para contato pelo whatsapp",
