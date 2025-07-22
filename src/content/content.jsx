@@ -188,20 +188,20 @@ const content = {
     features: {
       miniTag: "ESPECIALIDADE",
       title: "Atuação focada em desbloqueio de contas",
-      subtitle:
-        "Soluções jurídicas para quem teve contas bloqueadas por bancos ou pela Justiça.",
+      subtitle: "",
       imgFeatures: imgFeatures,
       imgDivisor: imgDivisor,
       card1: {
         img: featuresImg1,
-        title: "Desbloqueio de Contas Bancárias",
-        subtitle: "Reativação do acesso a contas bancárias bloqueadas",
+        title: "Atuação completa em processos trabalhistas individuais",
+        subtitle: "",
         description: (
           <div>
-            A_Definir
-            <br />
-            <br />
-            A_Definir
+            • Entrevista e análise jurídica do caso;
+            <br />• Elaboração da petição inicial com cálculos precisos;
+            <br />• Participação em audiências e perícias técnicas;
+            <br />• Pleitos de verbas rescisórias, adicionais, estabilidade e
+            reparações.
           </div>
         ),
         imgModal: imgFeaturesCardModal1,
@@ -227,15 +227,17 @@ const content = {
       },
       card2: {
         img: featuresImg2,
-        title: "Defesa em Processos de Bloqueio",
-        subtitle:
-          "Atuação com agilidade para identificar a origem do bloqueio (Judicial, BacenJud, Sisbajud, Receita Federal, dívidas, etc.)",
+        title: "Cálculos Trabalhistas e Liquidação de Sentença",
+        subtitle: "",
         description: (
           <div>
-            A_Definir
-            <br />
-            <br />
-            A_Definir
+            • Cálculo para instrução da petição inicial;
+            <br />• Liquidação de sentença ;
+            <br />• Atualização de valores conforme jurisprudência;
+            <br />• Impugnação a cálculos apresentados pela parte contrária;
+            <br />• Laudos técnicos para apoio à decisão judicial;
+            <br />• Apontamento de diferenças e inconsistências em réplica (com
+            quadros comparativos e exposição fundamentada).
           </div>
         ),
         imgModal: imgFeaturesCardModal2,
@@ -264,13 +266,17 @@ const content = {
       },
       card3: {
         img: featuresImg3,
-        title: "Regularização de CPF ou CNPJ com Pendências",
-        subtitle: "Correção de dados que causam bloqueios bancários",
+        title: "Execução Trabalhista",
+        subtitle: "",
         description: (
           <div>
-            A_Definir <br />
-            <br />
-            A_Definir
+            • Elaboração de pedidos de cumprimento de sentença;
+            <br />• Acompanhamento da fase de execução até o recebimento;
+            <br />• Utilização de ferramentas como SISBAJUD, RENAJUD e Infojud;
+            • Impugnação de embargos à execução e manifestações da parte
+            contrária;
+            <br />• Estratégias para localização de bens e recebimento do
+            crédito.
           </div>
         ),
         imgModal: imgFeaturesCardModal3,
@@ -305,14 +311,16 @@ const content = {
       },
       card4: {
         img: featuresImg4,
-        title: "Negociação com Bancos e Instituições Financeiras",
-        subtitle: "Acordos e tratativas diretas com instituições bancárias",
+        title: "Apoio a Escritórios e Advogados",
+        subtitle: "",
         description: (
           <div>
-            A_Definir
-            <br />
-            A_Definir
-            <br />
+            Atuação como parceiro técnico em liquidação e execução:
+            <br />• Cálculos iniciais e de liquidação para instrução processual;
+            • Memoriais de cálculo e impugnações técnicas;
+            <br />• Apoio em execuções complexas, inclusive na fase de bloqueio
+            e levantamento de valores; • Atuação sob demanda, com discrição e
+            parceria profissional.
           </div>
         ),
         imgModal: imgFeaturesCardModal4,
