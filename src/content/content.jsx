@@ -414,42 +414,23 @@ const content = {
       miniTag: "QUEM É O DR. ANDRÉ LIMA",
       title: "Minha trajetória",
       subtitle:
-        "Compromisso com técnica, agilidade e resultados para desbloqueio de contas",
+        "Advogado com atuação especializada em Direito do Trabalho, com foco em cálculos judiciais, liquidação de sentença e fase de execução.",
       labelInstagram: "Siga-nos no Instagram",
       labelFacebook: "Siga-nos no Facebook",
       labelLinkedin: "Siga-nos no LinkedIn",
       labelX: "Siga-nos no X",
       paragraph: (
         <div>
-          O escritório nasceu com o propósito de oferecer uma advocacia técnica,
-          ágil e eficaz para quem enfrenta bloqueios bancários.
-          <br />A atuação é voltada a resultados concretos, com atendimento
-          direto e personalizado.
+          Atuo tanto em ações diretas contra empresas quanto em parceria com
+          outros profissionais do Direito, auxiliando tecnicamente na condução
+          de processos em fase avançada ou com questões complexas de cálculos.
+          <br />
+          Meu trabalho é técnico, ético e voltado à efetividade da Justiça para
+          o trabalhador.
         </div>
       ),
       buttonModalLabelAbout: "Continuar lendo",
-      modal: (
-        <p>
-          O escritório nasceu com o propósito de oferecer uma advocacia técnica,
-          ágil e eficaz para quem enfrenta bloqueios bancários.
-          <br />
-          <br />
-          A atuação é voltada a resultados concretos, com atendimento direto e
-          personalizado.
-          <br />
-          <br />
-          Com ampla experiência em processos de desbloqueio, o Dr. André Lima
-          alia estratégia jurídica, conhecimento técnico e agilidade processual
-          para garantir soluções rápidas e seguras aos clientes.
-          <br />
-          <br />
-          A missão é clara: tornar o Direito acessível, oferecendo segurança,
-          clareza e total comprometimento em cada caso, sempre com ética,
-          responsabilidade e foco no resultado.
-          <br />
-          <br />
-        </p>
-      ),
+      modal: <p></p>,
       ctaButtonAriaLabel: "Botão para entrar em contato",
       ctaButtonText: "Entre em contato",
 
