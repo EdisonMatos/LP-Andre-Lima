@@ -187,8 +187,8 @@ const content = {
     },
     features: {
       miniTag: "ESPECIALIDADE",
-      title: "Atuação focada em desbloqueio de contas",
-      subtitle: "",
+      title: "Advocacia Trabalhista",
+      subtitle: "Atuação focada em Direito e Processo do Trabalho",
       imgFeatures: imgFeatures,
       imgDivisor: imgDivisor,
       card1: {
