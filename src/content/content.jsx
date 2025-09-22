@@ -59,8 +59,8 @@ export const infos = {
   domain: "advandrelima.com.br", // Sem "www"
   phone: {
     ddd: "11",
-    firstPart: "95684", // Apenas os 5 primeiros números (incluindo o 9)
-    secondPart: "9271", // Apenas os 4 últimos números
+    firstPart: "2680", // Apenas os 5 primeiros números (incluindo o 9)
+    secondPart: "0979", // Apenas os 4 últimos números
   },
   phoneSecundario: {
     ddd: "A_Definir",
