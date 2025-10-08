@@ -117,7 +117,7 @@ export default function SidebarSocial({ colorMode }) {
                             colorMode
                               ? "text-primary"
                               : "p-0 m-0 -mt-[16px] overflow-hidden font-medium text-white"
-                          } list-none text-paragraph3 font-mainFont`}
+                          } list-none text-paragraph3 font-secondFont`}
                         >
                           <li>
                             <a className="flex items-center w-full p-3 transition-colors cursor-pointer p-ripple border-round text-700 hover:surface-100 transition-duration-150">
