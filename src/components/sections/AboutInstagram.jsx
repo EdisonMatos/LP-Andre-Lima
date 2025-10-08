@@ -53,7 +53,6 @@ export default function AboutInstagram({
               className={`text-center`}
               miniTitle={content.texts.about.aboutSocial.miniTag}
               sectionHeaderTitle={content.texts.about.aboutSocial.title}
-              sectionHeaderSubtitle={content.texts.about.aboutSocial.subtitle}
               type="article"
               titleColorSet={textClass}
               subtitleColorSet={textClass}

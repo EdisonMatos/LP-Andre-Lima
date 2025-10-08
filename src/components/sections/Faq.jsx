@@ -48,11 +48,9 @@ export default function Faq({ colorMode }) {
           <MotionDivDownToUp>
             <Paragraphs className={`text-center transition hover:scale-110`}>
               <Button
-                className="hoover:scale-0 desktop1:hover:scale-105 text-black"
-                color="bg-transparent"
+                className="transform-none desktop1:hover:scale-10 transition-all duration-300"
                 label={content.texts.faq.paragraph}
                 colorMode={colorMode}
-                labelColor="text-secondary"
               />
             </Paragraphs>
           </MotionDivDownToUp>

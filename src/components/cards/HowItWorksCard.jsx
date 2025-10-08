@@ -35,7 +35,7 @@ export default function HowItWorksCard({
         {title}
       </h1>
       <p
-        className={`text-[16px] text-center desktop1:text-left w-full ${textColor} ${textOpacity}`}
+        className={`text-[16px] text-center font-secondFont desktop1:text-left w-full ${textColor} ${textOpacity}`}
       >
         {description}
       </p>
@@ -53,12 +53,13 @@ export default function HowItWorksCard({
       <p className="text-[16px] text-colorWhite opacity-70 text-center desktop1:text-left w-full">
         {description}
       </p>
-
     </div>
   );
 
   return animation ? (
-    <MotionDivDownToUp className="tablet1:w-[45%]">{BaseContent}</MotionDivDownToUp>
+    <MotionDivDownToUp className="tablet1:w-[45%]">
+      {BaseContent}
+    </MotionDivDownToUp>
   ) : (
     StaticContent
   );

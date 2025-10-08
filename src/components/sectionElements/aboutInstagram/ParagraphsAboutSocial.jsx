@@ -6,8 +6,8 @@ import MotionDivDownToUp from "../../animation/MotionDivDownToUp";
 function ParagraphsAboutSocial() {
   return (
     <MotionDivDownToUp>
-      <Paragraphs className="text-colorWhite text-opacity-80 mb-[48px]">
-        {content.texts.about.aboutSocial.paragraph}
+      <Paragraphs className="text-white text-opacity-80 mb-[48px]">
+        {content.texts.about.aboutSocial.subtitle}
       </Paragraphs>
     </MotionDivDownToUp>
   );
