@@ -20,6 +20,7 @@ export default function Button({
   color,
   animation = true,
   colorMode,
+  noScale = false,
 }) {
   // Define estilos com base no tamanho
   let textSizeClass = "";
@@ -59,14 +60,18 @@ export default function Button({
         <MotionDivDownToUp className="w-auto">
           <button
             onClick={onClick}
-            className={`flex ${className} ${sizeFeatures} bg-buttonColor flex-row items-center justify-around transition ${color} text-labelButtons desktop1:hover:scale-110`}
+            className={`flex ${className} ${sizeFeatures} shadow-custom-opacityButton shadow-shadowHero/0 ${
+              color || "bg-buttonColor"
+            } flex-row items-center justify-around transition text-labelButtons ${
+              noScale ? "" : "desktop1:hover:scale-110"
+            }`}
           >
             <div
               className={`flex items-center text-center ${gap} min-h-[24px]`}
             >
               {icon && <div className={`${buttonColor}`}>{icon}</div>}
               <p
-                className={`flex items-center ${textSizeClass} ${
+                className={`flex items-center  ${textSizeClass} ${
                   labelColor || buttonColor
                 } ${textclassName}`}
               >
@@ -79,7 +84,7 @@ export default function Button({
         <div className="w-auto">
           <button
             onClick={onClick}
-            className={`flex ${className} ${sizeFeatures} bg-buttonColor flex-row items-center justify-around transition ${color} text-labelButtons desktop1:hover:scale-110`}
+            className={`flex ${className} ${sizeFeatures} shadow-custom-opacityButton shadow-shadowHero/20 bg-buttonColor flex-row items-center justify-around transition ${color} text-labelButtons desktop1:hover:scale-110`}
           >
             <div
               className={`flex items-center text-center ${gap} min-h-[24px]`}
