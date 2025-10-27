@@ -564,6 +564,13 @@ const content = {
         },
       },
     },
+    calc: {
+      miniTag: "Cálculo Trabalhista",
+      title: "Descubra quanto você tem direito a receber",
+      subtitle:
+        "Use nossa calculadora gratuita e saiba, em poucos minutos, o valor estimado da sua rescisão.",
+      labelButton: "Calcular minha rescisão",
+    },
     trustedBy: {
       title: "A_Definir",
       subtitle: "A_Definir",

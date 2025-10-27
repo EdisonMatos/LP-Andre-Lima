@@ -13,6 +13,8 @@ import FloatingWhatsappButton from "../components/interactives/FloatingWhatsappB
 import Maps from "../components/sections/Maps";
 import TeamCards from "../components/sections/TeamCards";
 import BlogPosts from "../components/sections/BlogPosts";
+import Calculadora from "../components/sections/Calculadora";
+import CalculadoraRescisao from "../components/sections/Calculadora";
 
 export default function Index() {
   // Altere esta constante para: 'default', 'light' ou 'dark'
@@ -46,6 +48,7 @@ export default function Index() {
         socialPrint={true}
       />
       <Cta colorMode={colorMode} />
+      <CalculadoraRescisao />
       <Steps colorMode={colorMode} />
       {/* <Maps colorMode={colorMode} /> */}
       <Faq colorMode={colorMode} />

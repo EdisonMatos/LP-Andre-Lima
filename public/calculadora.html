@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-R" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dr. André Lima | Especialista em Execução Trabalhista - SP</title>
+    <!-- Fontes do Dr. André Lima -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+      /* Tema Dr. André Lima */
+      :root {
+        --cor-primaria: #f2c12e; /* Dourado Dr. André (Vibrante) */
+        --cor-secundaria: #f2c22eaf; /* Dourado mais claro (Vibrante) */
+        --cor-fundo: #f9f9f9; /* Fundo CLARO (Branco-gelo) */
+        --cor-card: #ffffff; /* Cards BRANCOS */
+        --cor-texto: #1e1e1e; /* Texto ESCURO */
+        --cor-texto-secundario: #666666; /* Cinza para textos de apoio */
+        --cor-borda: #dddddd; /* Borda dos cards/inputs */
+        --cor-grid: #eaeaea; /* Cor da malha do fundo */
+        --cor-sucesso: #4caf50;
+        --cor-erro: #e57373;
+        --cor-sombra: rgba(0, 0, 0, 0.1); /* Sombra mais suave */
+        --cor-texto-botao-primario: #121212; /* Texto escuro para botões dourados */
+        --transicao: all 0.3s ease;
+      }
+
+      body {
+        font-family: "Lato", sans-serif; /* Fonte base Dr. André */
+        background-color: var(--cor-fundo);
+        color: var(--cor-texto);
+        margin: 0;
+        padding: 20px 10px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+        line-height: 1.6;
+        /* Malha quadriculada */
+        background-image: linear-gradient(var(--cor-grid) 1px, transparent 1px),
+          linear-gradient(to right, var(--cor-grid) 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 900px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      /* Header Dr. André */
+      .logo {
+        max-width: 200px; /* Reduzido de 250px para o tamanho ideal */
+        height: auto;
+        margin-bottom: 30px; /* Aumentado de 15px para criar o espaço (quadrado vermelho) */
+        background-color: #383639;
+        padding: 5px;
+        border-radius: 5px;
+      }
+
+      .header {
+        text-align: center;
+        padding: 10px 20px; /* Reduzido o padding superior/inferior */
+      }
+
+      .header h1 {
+        margin: 0 0 10px;
+        font-size: 2.2em;
+        font-weight: 700;
+        color: var(--cor-primaria);
+        font-family: "Merriweather", serif; /* Fonte de título Dr. André */
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15); /* Sombra para contraste */
+      }
+
+      .header p {
+        margin: 0;
+        font-size: 1em;
+        color: var(--cor-texto-secundario);
+      }
+
+      .main-content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .card {
+        background-color: var(--cor-card);
+        padding: 30px;
+        border-radius: 8px;
+        border: 1px solid var(--cor-borda);
+        box-shadow: 0 4px 15px var(--cor-sombra);
+      }
+
+      .card h2 {
+        margin-top: 0;
+        color: var(--cor-primaria);
+        border-bottom: 1px solid var(--cor-borda);
+        padding-bottom: 15px;
+        font-size: 1.5em;
+        font-family: "Merriweather", serif; /* Fonte de título Dr. André */
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15); /* Sombra para contraste */
+      }
+
+      .form-section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .form-group label {
+        font-weight: 600;
+        color: var(--cor-texto-secundario);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid var(--cor-borda);
+        border-radius: 6px;
+        background-color: var(
+          --cor-card
+        ); /* Alterado de var(--cor-fundo) para var(--cor-card) */
+        color: var(--cor-texto);
+        font-family: "Lato", sans-serif;
+        transition: var(--transicao);
+        box-sizing: border-box; /* Garante que o padding não estoure o layout */
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: var(--cor-primaria);
+        box-shadow: 0 0 0 3px rgba(214, 168, 35, 0.2);
+      }
+
+      /* Layout em Grid da calculadora original */
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+
+      /* Ajuste para campos fora do grid */
+      #fgtsSaldo {
+        max-width: 300px;
+      }
+      #observacoes {
+        max-width: 400px;
+      }
+
+      /* Botões Dr. André */
+      .btn-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 25px;
+      }
+
+      .btn {
+        padding: 12px 25px;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transicao);
+        text-transform: uppercase;
+        font-size: 0.9em;
+      }
+
+      .btn-primary {
+        background-color: var(--cor-primaria);
+        color: var(--cor-texto-botao-primario);
+        border: 1px solid var(--cor-primaria);
+      }
+
+      .btn-primary:hover {
+        background-color: #b88a1e;
+        transform: translateY(-2px);
+      }
+
+      .btn-secondary {
+        background-color: transparent;
+        color: var(--cor-primaria);
+        border: 1px solid var(--cor-primaria);
+      }
+
+      .btn-secondary:hover {
+        background-color: var(--cor-primaria);
+        color: var(--cor-texto-botao-primario);
+      }
+
+      #result-section {
+        display: none;
+      }
+
+      /* Card de Sumário Dr. André */
+      .summary-card {
+        background-color: var(--cor-card);
+        border: 1px solid var(--cor-primaria);
+        color: var(--cor-texto);
+        padding: 25px;
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      .summary-card p {
+        margin: 0;
+        font-size: 1.2em;
+        color: var(--cor-texto-secundario);
+      }
+
+      .summary-card h3 {
+        margin: 5px 0 0;
+        font-size: 2.8em;
+        font-weight: 700;
+        color: var(--cor-primaria);
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15); /* Sombra para contraste */
+      }
+
+      .summary-card.negative {
+        border-color: var(--cor-erro);
+      }
+      .summary-card.negative h3 {
+        color: var(--cor-erro);
+      }
+
+      .result-details {
+        margin-top: 20px;
+      }
+
+      .result-details table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+        display: block; /* Para permitir o scroll horizontal */
+        overflow-x: auto;
+      }
+
+      .result-details table th,
+      .result-details table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid var(--cor-borda);
+      }
+
+      .result-details table th {
+        background-color: var(--cor-fundo);
+        font-weight: 600;
+      }
+
+      .valor-devido {
+        color: var(--cor-sucesso);
+        font-weight: 600;
+      }
+      .valor-desconto {
+        color: var(--cor-erro);
+        font-weight: 600;
+      }
+
+      .legal-notes {
+        margin-top: 20px;
+        padding-left: 20px;
+        list-style: disc;
+      }
+
+      .legal-notes li {
+        margin-bottom: 8px;
+        color: var(--cor-texto-secundario);
+      }
+
+      /* Rodapé Dr. André */
+      .disclaimer-rodape {
+        text-align: center;
+        font-size: 0.8em;
+        color: var(--cor-texto-secundario);
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid var(--cor-borda);
+      }
+
+      .tooltip {
+        position: relative;
+        display: inline-block;
+        cursor: help;
+      }
+
+      .tooltip .tooltip-icon {
+        border: 1px solid var(--cor-texto-secundario);
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+      }
+
+      .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 250px;
+        background-color: var(--cor-card);
+        color: var(--cor-texto);
+        text-align: center;
+        border-radius: 6px;
+        padding: 10px;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -125px;
+        opacity: 0;
+        transition: opacity 0.3s;
+        border: 1px solid var(--cor-borda);
+      }
+
+      .tooltip .tooltiptext::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: var(--cor-borda) transparent transparent transparent;
+      }
+
+      .tooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .message-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: var(--cor-card);
+        padding: 20px 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px var(--cor-sombra);
+        z-index: 1000;
+        display: none;
+        text-align: center;
+        max-width: 350px;
+        border: 1px solid var(--cor-borda);
+      }
+
+      .message-box h3 {
+        margin-top: 0;
+        color: var(--cor-primaria);
+      }
+
+      .message-box p {
+        margin: 15px 0;
+        color: var(--cor-texto-secundario);
+      }
+
+      .message-box button {
+        background-color: var(--cor-primaria);
+        color: var(--cor-texto-botao-primario);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      /* Cenários comparativos */
+      #scenario-comparison {
+        display: none;
+        margin-top: 20px;
+      }
+
+      #scenario-comparison table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+        display: block; /* Para permitir o scroll horizontal */
+        overflow-x: auto;
+        white-space: nowrap; /* Impede a quebra de linha nas células */
+      }
+
+      #scenario-comparison table th,
+      #scenario-comparison table td {
+        padding: 12px;
+        border: 1px solid var(--cor-borda);
+        text-align: center;
+      }
+
+      #scenario-comparison table th {
+        background-color: var(--cor-primaria);
+        color: var(--cor-texto-botao-primario);
+      }
+
+      #scenario-comparison table tr:nth-child(even) {
+        background-color: var(--cor-fundo);
+      }
+
+      /* Seção Sobre Dr. André */
+      .about-section {
+        display: flex;
+        flex-direction: column; /* Manter empilhado por padrão */
+        align-items: center; /* Centraliza a foto e o texto */
+        gap: 20px;
+        text-align: center; /* Centraliza o texto */
+      }
+
+      .about-photo {
+        width: 150px; /* Tamanho da foto */
+        height: 150px;
+        border-radius: 50%; /* ATUALIZAÇÃO: Torna a foto redonda */
+        object-fit: cover;
+        border: 3px solid var(--cor-primaria);
+        flex-shrink: 0;
+        margin-bottom: 15px; /* Espaçamento abaixo da foto */
+      }
+
+      .about-text p {
+        margin-top: 0;
+        text-align: left; /* Ajusta o texto para a esquerda novamente */
+      }
+
+      /* Otimizações para telas pequenas */
+      @media (max-width: 768px) {
+        body {
+          padding: 10px;
+        }
+        .card {
+          padding: 15px;
+        }
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+        .btn {
+          width: 100%;
+        }
+        #fgtsSaldo,
+        #observacoes {
+          max-width: 100%;
+        }
+
+        .about-section {
+          align-items: center; /* Garante centralização em mobile */
+        }
+
+        .about-photo {
+          width: 120px;
+          height: 120px;
+          margin-bottom: 10px;
+        }
+        .about-text {
+          text-align: left; /* Garante que o texto volte a ser alinhado à esquerda em mobile */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header Dr. André -->
+      <div class="header">
+        <img src="../src/logo.webp" alt="Logo André Lima" class="logo" />
+        <!-- Caminho local da logo -->
+        <h1>Calculadora de Rescisão</h1>
+        <p>Uma ferramenta de estimativa por Dr. André Lima</p>
+      </div>
+
+      <div class="main-content">
+        <div class="card">
+          <!-- Remoção das Abas -->
+          <form id="rescisao-form">
+            <div id="tab-basico" class="tab-content active">
+              <h2>Dados Essenciais</h2>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="tipoDesligamento">Tipo de Desligamento</label>
+                  <select id="tipoDesligamento" required>
+                    <option value="">Selecione...</option>
+                    <option value="sem-justa-causa">Sem Justa Causa</option>
+                    <option value="pedido-demissao">Pedido de Demissão</option>
+                    <option value="justa-causa">Justa Causa</option>
+                    <option value="acordo">Acordo (Art. 484-A)</option>
+                    <option value="rescisao-indireta">Rescisão Indireta</option>
+                    <option value="termino-experiencia">
+                      Término Contrato Experiência
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="salarioBase">Salário Base Mensal (R$)</label>
+                  <input
+                    type="text"
+                    id="salarioBase"
+                    class="currency"
+                    value="1518,00"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="dataAdmissao">Data de Admissão</label>
+                  <input
+                    type="date"
+                    id="dataAdmissao"
+                    value="2024-01-15"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="dataDesligamento">Data de Desligamento</label>
+                  <input
+                    type="date"
+                    id="dataDesligamento"
+                    value="2024-08-28"
+                    required
+                  />
+                </div>
+                <div class="form-group" id="aviso-group">
+                  <!-- Grupo do Aviso Prévio --><label for="avisoModelo"
+                    >Aviso Prévio</label
+                  >
+                  <select id="avisoModelo" required>
+                    <option value="trabalhado">Trabalhado</option>
+                    <option value="indenizado">Indenizado</option>
+                    <option value="nao-cumprido">
+                      Não Cumprido (Descontar)
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="faltasDescontos"
+                    >Faltas/Descontos no Mês (R$)</label
+                  >
+                  <input
+                    type="text"
+                    id="faltasDescontos"
+                    class="currency"
+                    value="0,00"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="fgtsOption">Saldo do FGTS</label>
+                <select id="fgtsOption" required>
+                  <option value="informar">Informar Saldo Total</option>
+                  <option value="estimar">Estimar Saldo (Aproximado)</option>
+                </select>
+              </div>
+              <div class="form-group" id="fgts-informado-group">
+                <label for="fgtsSaldo">Saldo Total de FGTS (R$)</label>
+                <input
+                  type="text"
+                  id="fgtsSaldo"
+                  class="currency"
+                  value="5000,00"
+                  required
+                />
+              </div>
+              <div
+                class="form-group"
+                id="fgts-estimar-group"
+                style="display: none"
+              >
+                <p
+                  class="estimativa-aviso"
+                  style="font-size: 0.8em; color: var(--cor-texto-secundario)"
+                >
+                  A estimativa será calculada com base no salário e no tempo de
+                  serviço.
+                </p>
+              </div>
+
+              <div class="form-group spaced-row">
+                <div class="label-and-tooltip">
+                  <label for="feriasVencidas">Possui Férias vencidas?</label>
+                  <div class="tooltip">
+                    <span class="tooltip-icon">ⓘ</span>
+                    <span class="tooltiptext"
+                      >Marque esta opção se o trabalhador possui um período
+                      aquisitivo de férias de 12 meses completo, mas ainda não
+                      gozou do descanso.</span
+                    >
+                  </div>
+                </div>
+                <input type="checkbox" id="feriasVencidas" />
+              </div>
+
+              <div class="form-group">
+                <label for="observacoes">Observações</label>
+                <textarea
+                  id="observacoes"
+                  rows="3"
+                  placeholder="Insira aqui informações adicionais para o relatório..."
+                ></textarea>
+              </div>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="btn-group">
+              <button type="submit" class="btn btn-primary">Calcular</button>
+              <button type="button" id="compare-btn" class="btn btn-secondary">
+                Comparar Cenários
+              </button>
+              <button type="button" id="limpar-btn" class="btn btn-secondary">
+                Limpar
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Seção de Comparação de Cenários -->
+        <div id="scenario-comparison" class="card">
+          <h2>Comparador de Cenários</h2>
+          <table id="comparison-table">
+            <thead>
+              <tr>
+                <th>Verba</th>
+                <th>Sem Justa Causa</th>
+                <th>Pedido de Demissão</th>
+                <th>Justa Causa</th>
+                <th>Acordo (484-A)</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- Seção de Resultado -->
+        <div id="result-section" class="card">
+          <h2>Resultado da Simulação</h2>
+          <div class="summary-card">
+            <p>Estimativa Líquida a Receber</p>
+            <h3 id="valor-liquido">R$ 0,00</h3>
+          </div>
+          <div class="result-details">
+            <p>Total Bruto: <strong id="valor-bruto">R$ 0,00</strong></p>
+            <p>
+              Total de Descontos: <strong id="valor-descontos">R$ 0,00</strong>
+            </p>
+
+            <h3>Memória de Cálculo</h3>
+            <table id="calculation-table">
+              <thead>
+                <tr>
+                  <th>Verba</th>
+                  <th>Descrição</th>
+                  <th>Valor</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+
+            <div id="legal-warnings">
+              <h3>Avisos Importantes</h3>
+              <ul class="legal-notes"></ul>
+            </div>
+          </div>
+
+          <div class="btn-group">
+            <button
+              type="button"
+              id="pdf-btn"
+              class="btn btn-secondary btn-export"
+            >
+              Exportar PDF
+            </button>
+            <!-- Botões de compartilhamento removidos para simplificar -->
+          </div>
+        </div>
+
+        <!-- Seção Sobre Dr. André -->
+        <div class="card about-section">
+          <h2>Sobre o Dr. André Lima</h2>
+
+          <!-- Ajustado o posicionamento da foto para ser um item direto do flex-direction column --><img
+            src="../src//imgCalculadora.webp"
+            alt="Foto Dr. André Lima"
+            class="about-photo"
+          />
+          <!-- Caminho local da foto -->
+
+          <!-- Texto sobre -->
+          <div class="about-text">
+            <p>
+              Sou advogado trabalhista com atuação desde 2017, especializado em
+              cálculos de verbas rescisórias, horas extras e demais direitos do
+              trabalhador.
+            </p>
+            <p>
+              Meu diferencial está na união entre prática jurídica sólida e
+              domínio técnico em cálculos trabalhistas, garantindo resultados
+              precisos e confiáveis para trabalhadores e profissionais do
+              Direito.
+            </p>
+            <p>
+              Formado em Direito e especialista em Execução Civil e Trabalhista,
+              ofereço um serviço completo: da análise estratégica do caso à
+              apuração exata dos valores devidos. Atuo com seriedade, ética
+              rigorosa e compromisso inabalável com a Justiça.
+            </p>
+            <!-- Links de Contato (Exemplo) -->
+            <div class="btn-group" style="margin-top: 15px">
+              <a
+                href="https://api.whatsapp.com/send?phone=SEUNUMERO"
+                target="_blank"
+                class="btn btn-primary"
+                style="text-decoration: none"
+              >
+                Fale no WhatsApp
+              </a>
+              <a
+                href="mailto:contato@advandrelima.com.br"
+                class="btn btn-secondary"
+                style="text-decoration: none"
+              >
+                Envie um Email
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rodapé Dr. André -->
+      <div class="disclaimer-rodape">
+        <p>
+          Esta é uma ferramenta de estimativa. Os valores podem variar conforme
+          convenções coletivas e outros fatores. Para um cálculo oficial,
+          consulte um profissional.
+        </p>
+      </div>
+    </div>
+
+    <!-- Caixa de Mensagem (Popup) -->
+    <div id="message-box" class="message-box">
+      <h3 id="message-title"></h3>
+      <p id="message-text"></p>
+      <button id="message-ok-btn">OK</button>
+    </div>
+
+    <script>
+      // Mapeamento de DOM e variáveis globais
+      const $ = (s) => document.querySelector(s);
+      const $$ = (s) => document.querySelectorAll(s);
+
+      const form = $("#rescisao-form");
+      const tipoDesligamentoSelect = $("#tipoDesligamento");
+      const avisoGroup = $("#aviso-group");
+      const fgtsOptionSelect = $("#fgtsOption");
+      const fgtsInformadoGroup = $("#fgts-informado-group");
+      const fgtsEstimarGroup = $("#fgts-estimar-group");
+      const resultSection = $("#result-section");
+      const valorLiquido = $("#valor-liquido");
+      const valorBruto = $("#valor-bruto");
+      const valorDescontos = $("#valor-descontos");
+      const calculationTableBody = $("#calculation-table tbody");
+      const legalNotesList = $(".legal-notes");
+      const compareBtn = $("#compare-btn");
+      const limparBtn = $("#limpar-btn");
+      const comparisonTableBody = $("#comparison-table tbody");
+      const scenarioComparisonSection = $("#scenario-comparison");
+      const pdfBtn = $("#pdf-btn");
+      const reportDateSpan = $("#report-date"); // Removido do HTML, mas mantido caso necessário
+
+      // Constantes e tabelas (base 2024)
+      const inssTabela = [
+        { limite: 1412.0, aliquota: 0.075, deducao: 0.0 },
+        { limite: 2666.68, aliquota: 0.09, deducao: 21.18 },
+        { limite: 4000.03, aliquota: 0.12, deducao: 101.18 },
+        { limite: 7786.02, aliquota: 0.14, deducao: 181.18 },
+      ];
+
+      const irrfTabela = [
+        { limite: 2259.2, aliquota: 0.0, deducao: 0.0 },
+        { limite: 2826.65, aliquota: 0.075, deducao: 169.44 },
+        { limite: 3751.05, aliquota: 0.15, deducao: 381.44 },
+        { limite: 4664.68, aliquota: 0.225, deducao: 662.77 },
+        { limite: Infinity, aliquota: 0.275, deducao: 896.0 },
+      ];
+      const inssTeto = 7786.02;
+
+      // Mapeamento de tipos de rescisão para regras
+      const regrasRescisao = {
+        "sem-justa-causa": {
+          multaFgts: 0.4,
+          avisoPrevio: true,
+          fgtsSaque: true,
+          seguroDesemprego: true,
+          avisoDesconta: false,
+          decimoTerceiro: true,
+          feriasProporcionais: true,
+          feriasVencidas: true,
+        },
+        "pedido-demissao": {
+          multaFgts: 0.0,
+          avisoPrevio: true,
+          fgtsSaque: false,
+          seguroDesemprego: false,
+          avisoDesconta: true,
+          decimoTerceiro: true,
+          feriasProporcionais: true,
+          feriasVencidas: true,
+        },
+        "justa-causa": {
+          multaFgts: 0.0,
+          avisoPrevio: false,
+          fgtsSaque: false,
+          seguroDesemprego: false,
+          avisoDesconta: false,
+          decimoTerceiro: false,
+          feriasProporcionais: false,
+          feriasVencidas: true,
+        },
+        acordo: {
+          multaFgts: 0.2,
+          avisoPrevio: true,
+          aviso50p: true,
+          fgtsSaque: true,
+          seguroDesemprego: false,
+          avisoDesconta: false,
+          decimoTerceiro: true,
+          feriasProporcionais: true,
+          feriasVencidas: true,
+        },
+        "rescisao-indireta": {
+          multaFgts: 0.4,
+          avisoPrevio: true,
+          fgtsSaque: true,
+          seguroDesemprego: true,
+          avisoDesconta: false,
+          decimoTerceiro: true,
+          feriasProporcionais: true,
+          feriasVencidas: true,
+        },
+        "termino-experiencia": {
+          multaFgts: 0.0,
+          avisoPrevio: false,
+          fgtsSaque: true,
+          seguroDesemprego: false,
+          avisoDesconta: false,
+          decimoTerceiro: true,
+          feriasProporcionais: true,
+          feriasVencidas: true,
+        },
+      };
+
+      // Funções de formatação e utilitários
+      function parseCurrency(value) {
+        if (!value) return 0;
+        return parseFloat(value.replace(/\./g, "").replace(",", "."));
+      }
+
+      function formatCurrency(value) {
+        return new Intl.NumberFormat("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        }).format(value);
+      }
+
+      function formatDate(date) {
+        return date.toLocaleDateString("pt-BR");
+      }
+
+      function showMessage(title, message) {
+        const msgBox = $("#message-box");
+        const msgTitle = $("#message-title");
+        const msgText = $("#message-text");
+        const msgBtn = $("#message-ok-btn");
+
+        msgTitle.textContent = title;
+        msgText.textContent = message;
+        msgBox.style.display = "block";
+        msgBtn.onclick = () => (msgBox.style.display = "none");
+      }
+
+      // Funções de cálculo
+      function getMonthsWorked(admissao, desligamento) {
+        const d1 = new Date(admissao);
+        const d2 = new Date(desligamento);
+        let months = (d2.getFullYear() - d1.getFullYear()) * 12;
+        months -= d1.getMonth();
+        months += d2.getMonth();
+
+        // Se o dia de desligamento for menor que o dia de admissão, não conta o mês
+        if (d2.getDate() < d1.getDate()) {
+          months--;
+        }
+        return months <= 0 ? 0 : months;
+      }
+
+      function getAnosCompletos(admissao, desligamento) {
+        const start = new Date(admissao);
+        const end = new Date(desligamento);
+        let years = end.getFullYear() - start.getFullYear();
+
+        // Ajusta se o aniversário de contrato ainda não chegou
+        if (
+          end.getMonth() < start.getMonth() ||
+          (end.getMonth() === start.getMonth() &&
+            end.getDate() < start.getDate())
+        ) {
+          years--;
+        }
+        return Math.max(0, years);
+      }
+
+      function calcSalarioSaldo(salario, dataDesligamento) {
+        const diasNoMes = new Date(
+          dataDesligamento.getFullYear(),
+          dataDesligamento.getMonth() + 1,
+          0
+        ).getDate();
+        const diasTrabalhados = dataDesligamento.getDate();
+        return (salario / diasNoMes) * diasTrabalhados;
+      }
+
+      function calcAvisoPrevio(salarioBase, dataAdmissao, dataDesligamento) {
+        const salarioComMedias = salarioBase; // Simplificado: sem médias
+        const anosCompletos = getAnosCompletos(dataAdmissao, dataDesligamento);
+        const diasAviso = 30 + Math.min(60, anosCompletos * 3); // Limite de 90 dias
+
+        return (salarioComMedias / 30) * diasAviso;
+      }
+
+      function calcDecimoTerceiro(salarioBase, dataDesligamento) {
+        const salarioComMedias = salarioBase; // Simplificado: sem médias
+        let mesesProporcionais = dataDesligamento.getMonth() + 1; // Mês atual
+
+        // Verifica se trabalhou 15 dias no mês de desligamento
+        const diaDesligamento = dataDesligamento.getDate();
+        if (diaDesligamento < 15) {
+          mesesProporcionais--;
+        }
+
+        return (salarioComMedias / 12) * mesesProporcionais;
+      }
+
+      function calcFeriasProporcionais(
+        salarioBase,
+        dataAdmissao,
+        dataDesligamento
+      ) {
+        const salarioComMedias = salarioBase; // Simplificado: sem médias
+        const d1 = new Date(dataAdmissao);
+        const d2 = new Date(dataDesligamento);
+
+        let mesesTrabalhados =
+          (d2.getFullYear() - d1.getFullYear()) * 12 +
+          (d2.getMonth() - d1.getMonth());
+        if (d2.getDate() >= 15) {
+          mesesTrabalhados++;
+        }
+
+        const mesesAquisitivosIncompletos = mesesTrabalhados % 12;
+
+        return (salarioComMedias / 12) * mesesAquisitivosIncompletos * (4 / 3);
+      }
+
+      function calcFeriasVencidas(salarioBase) {
+        const salarioComMedias = salarioBase; // Simplificado: sem médias
+        return salarioComMedias * (4 / 3);
+      }
+
+      function calcFgtsSaldo(fgtsOption, fgtsSaldo, fgtsMeses, salarioBase) {
+        if (fgtsOption === "informar") {
+          return fgtsSaldo;
+        } else {
+          // Estimativa: Salário * 8% * meses trabalhados
+          const salarioComMedias = salarioBase; // Simplificado
+          return salarioComMedias * 0.08 * fgtsMeses;
+        }
+      }
+
+      function calcMultaFgts(fgtsSaldo, aliquota) {
+        return fgtsSaldo * aliquota;
+      }
+
+      function calcINSS(base) {
+        const baseINSS = Math.min(base, inssTeto);
+        let inssValor = 0;
+
+        // Cálculo simplificado usando parcelas a deduzir (INSS 2024)
+        if (baseINSS <= 1412.0) {
+          inssValor = baseINSS * 0.075;
+        } else if (baseINSS <= 2666.68) {
+          inssValor = baseINSS * 0.09 - 21.18;
+        } else if (baseINSS <= 4000.03) {
+          inssValor = baseINSS * 0.12 - 101.18;
+        } else if (baseINSS <= 7786.02) {
+          inssValor = baseINSS * 0.14 - 181.18;
+        } else {
+          // Teto
+          inssValor = 7786.02 * 0.14 - 181.18;
+        }
+        return Math.max(0, inssValor);
+      }
+
+      function calcIRRF(base) {
+        let irrfValor = 0;
+        // Cálculo simplificado (IRRF 2024)
+        if (base <= 2259.2) {
+          irrfValor = 0;
+        } else if (base <= 2826.65) {
+          irrfValor = base * 0.075 - 169.44;
+        } else if (base <= 3751.05) {
+          irrfValor = base * 0.15 - 381.44;
+        } else if (base <= 4664.68) {
+          irrfValor = base * 0.225 - 662.77;
+        } else {
+          irrfValor = base * 0.275 - 896.0;
+        }
+        return Math.max(0, irrfValor);
+      }
+
+      // Função principal que agrega todos os cálculos
+      function calcRescisao(data) {
+        const {
+          tipoDesligamento,
+          salarioBase,
+          dataAdmissao,
+          dataDesligamento,
+          avisoModelo,
+          faltasDescontos,
+          feriasVencidas,
+          fgtsOption,
+          fgtsSaldo,
+        } = data;
+
+        // Converter strings de data para objetos Date
+        const admissao = new Date(`${dataAdmissao}T00:00:00`);
+        const desligamento = new Date(`${dataDesligamento}T00:00:00`);
+
+        const regras = regrasRescisao[tipoDesligamento];
+
+        // Simplificado: sem médias
+        const mediaVerbas = 0;
+
+        let bruto = 0;
+        let descontos = 0;
+        const verbas = {};
+        const notas = [];
+        const elegibilidade = {
+          fgtsSaque: regras.fgtsSaque,
+          seguroDesemprego: regras.seguroDesemprego,
+          avisoPrazo:
+            "Em até 10 dias corridos contados do término do contrato.",
+        };
+
+        let decimoTerceiro = 0;
+
+        // 1. Saldo de Salário
+        const saldoSalario = calcSalarioSaldo(salarioBase, desligamento);
+        const diasTrabalhados = desligamento.getDate(); // <-- CORREÇÃO AQUI
+        verbas["Saldo de Salário"] = {
+          valor: saldoSalario,
+          formula: `${diasTrabalhados} dias trabalhados no mês`,
+        };
+        bruto += saldoSalario;
+
+        // 2. Aviso Prévio
+        const avisoPrevioValor = calcAvisoPrevio(
+          salarioBase,
+          admissao,
+          desligamento
+        );
+        if (regras.avisoPrevio) {
+          if (avisoModelo === "indenizado") {
+            if (regras.aviso50p) {
+              verbas["Aviso Prévio Indenizado (50%)"] = {
+                valor: avisoPrevioValor / 2,
+                formula: "50% do valor do aviso (Acordo)",
+              };
+              bruto += avisoPrevioValor / 2;
+            } else {
+              verbas["Aviso Prévio Indenizado"] = {
+                valor: avisoPrevioValor,
+                formula: "Valor do aviso prévio indenizado",
+              };
+              bruto += avisoPrevioValor;
+            }
+          } else if (avisoModelo === "trabalhado") {
+            verbas["Aviso Prévio Trabalhado"] = {
+              valor: 0,
+              formula: "Aviso cumprido e pago no saldo final",
+            };
+          } else if (avisoModelo === "nao-cumprido" && regras.avisoDesconta) {
+            verbas["Aviso Prévio (Desconto)"] = {
+              valor: -avisoPrevioValor,
+              formula: "Desconto por não cumprimento (Pedido de Demissão)",
+            };
+            descontos += avisoPrevioValor;
+          }
+        }
+
+        // 3. 13º Salário
+        if (regras.decimoTerceiro) {
+          decimoTerceiro = calcDecimoTerceiro(salarioBase, desligamento);
+          verbas["13º Salário Proporcional"] = {
+            valor: decimoTerceiro,
+            formula: "Proporcional aos meses trabalhados no ano",
+          };
+          bruto += decimoTerceiro;
+        }
+
+        // 4. Férias
+        if (feriasVencidas && regras.feriasVencidas) {
+          const feriasVencidasValor = calcFeriasVencidas(salarioBase);
+          verbas["Férias Vencidas + 1/3"] = {
+            valor: feriasVencidasValor,
+            formula: "Período completo de 12 meses não gozado",
+          };
+          bruto += feriasVencidasValor;
+        }
+
+        if (regras.feriasProporcionais) {
+          const feriasProporcionais = calcFeriasProporcionais(
+            salarioBase,
+            admissao,
+            desligamento
+          );
+          verbas["Férias Proporcionais + 1/3"] = {
+            valor: feriasProporcionais,
+            formula: "Proporcional ao período aquisitivo incompleto",
+          };
+          bruto += feriasProporcionais;
+        }
+
+        // 5. FGTS e Multa
+        const mesesTrabalhadosTotal =
+          getMonthsWorked(admissao, desligamento) + 1; // +1 para o mês da rescisão
+        const fgtsSaldoCalculado = calcFgtsSaldo(
+          fgtsOption,
+          fgtsSaldo,
+          mesesTrabalhadosTotal,
+          salarioBase
+        );
+        verbas["FGTS (Saldo Estimado/Informado)"] = {
+          valor: fgtsSaldoCalculado,
+          formula: "Valor base para cálculo da multa",
+        };
+
+        if (regras.multaFgts > 0) {
+          const multaFgts = calcMultaFgts(fgtsSaldoCalculado, regras.multaFgts);
+          verbas["Multa FGTS"] = {
+            valor: multaFgts,
+            formula: `${regras.multaFgts * 100}% do saldo total do FGTS.`,
+          };
+          bruto += multaFgts;
+        }
+
+        // 6. Descontos
+        const baseINSS = saldoSalario;
+        const inssValor = calcINSS(baseINSS);
+        const baseINSS13 = decimoTerceiro;
+        const inssValor13 = calcINSS(baseINSS13);
+
+        const inssTotal = inssValor + inssValor13;
+        if (inssTotal > 0) {
+          verbas["INSS (sobre Saldo e 13º)"] = {
+            valor: -inssTotal,
+            formula: "Desconto sobre verbas salariais",
+          };
+          descontos += inssTotal;
+        }
+
+        // Base IRRF = Bruto - INSS - (Outras deduções que não temos aqui)
+        // IRRF incide separadamente sobre férias e 13º, mas simplificaremos
+        const baseIRRF = bruto - inssTotal - (verbas["Multa FGTS"]?.valor || 0); // Multa é isenta
+        const irrfValor = calcIRRF(baseIRRF);
+        if (irrfValor > 0) {
+          verbas["IRRF (Estimativa)"] = {
+            valor: -irrfValor,
+            formula: "Desconto sobre a base de cálculo (Bruto - INSS)",
+          };
+          descontos += irrfValor;
+        }
+
+        if (faltasDescontos > 0) {
+          verbas["Outros Descontos"] = {
+            valor: -faltasDescontos,
+            formula: "Faltas e outros adiantamentos informados.",
+          };
+          descontos += faltasDescontos;
+        }
+
+        const liquido = bruto - descontos;
+
+        return {
+          bruto,
+          descontos,
+          liquido,
+          verbas,
+          notas,
+          elegibilidade,
+        };
+      }
+
+      // Renderização da interface
+      function renderResult(result) {
+        valorBruto.textContent = formatCurrency(result.bruto);
+        valorDescontos.textContent = formatCurrency(result.descontos);
+
+        if (result.liquido < 0) {
+          valorLiquido.textContent =
+            formatCurrency(Math.abs(result.liquido)) + " (Valor a Pagar)";
+          valorLiquido.parentElement.classList.add("negative");
+        } else {
+          valorLiquido.textContent = formatCurrency(result.liquido);
+          valorLiquido.parentElement.classList.remove("negative");
+        }
+
+        resultSection.style.display = "block";
+
+        calculationTableBody.innerHTML = "";
+        for (const [key, value] of Object.entries(result.verbas)) {
+          if (key.includes("FGTS (Saldo")) continue; // Não mostra o saldo base na tabela
+          const row = document.createElement("tr");
+          row.innerHTML = `
+                    <td>${key}</td>
+                    <td><small>${value.formula}</small></td>
+                    <td class="${
+                      value.valor >= 0 ? "valor-devido" : "valor-desconto"
+                    }">${formatCurrency(value.valor)}</td>
+                `;
+          calculationTableBody.appendChild(row);
+        }
+
+        legalNotesList.innerHTML = "";
+        if (result.elegibilidade.fgtsSaque) {
+          legalNotesList.innerHTML +=
+            "<li><strong>Saque FGTS:</strong> Elegível.</li>";
+        } else {
+          legalNotesList.innerHTML +=
+            "<li><strong>Saque FGTS:</strong> Não elegível (exceto casos específicos).</li>";
+        }
+        if (result.elegibilidade.seguroDesemprego) {
+          legalNotesList.innerHTML +=
+            "<li><strong>Seguro-Desemprego:</strong> Elegível (se preencher os demais requisitos legais).</li>";
+        } else {
+          legalNotesList.innerHTML +=
+            "<li><strong>Seguro-Desemprego:</strong> Não elegível para esta modalidade.</li>";
+        }
+        legalNotesList.innerHTML += `<li><strong>Prazo para Pagamento:</strong> ${result.elegibilidade.avisoPrazo}</li>`;
+
+        resultSection.scrollIntoView({ behavior: "smooth" });
+      }
+
+      function updateUIforType(tipo) {
+        // Mostra o campo de aviso prévio por padrão
+        avisoGroup.style.display = "flex";
+
+        if (tipo === "pedido-demissao") {
+          $("#avisoModelo").value = "nao-cumprido";
+        } else if (
+          tipo === "sem-justa-causa" ||
+          tipo === "rescisao-indireta" ||
+          tipo === "acordo"
+        ) {
+          $("#avisoModelo").value = "indenizado";
+        } else if (tipo === "justa-causa" || tipo === "termino-experiencia") {
+          // Esconde o aviso prévio pois não se aplica
+          avisoGroup.style.display = "none";
+        }
+      }
+
+      function updateFGTSFields() {
+        if (fgtsOptionSelect.value === "informar") {
+          fgtsInformadoGroup.style.display = "flex";
+          fgtsEstimarGroup.style.display = "none";
+          $("#fgtsSaldo").setAttribute("required", "required");
+        } else {
+          fgtsInformadoGroup.style.display = "none";
+          fgtsEstimarGroup.style.display = "flex";
+          $("#fgtsSaldo").removeAttribute("required");
+        }
+      }
+
+      // Lógica de exportação
+      function exportToPDF() {
+        const element = $("#result-section");
+        html2canvas(element).then((canvas) => {
+          const imgData = canvas.toDataURL("image/png");
+          const { jsPDF } = window.jspdf;
+          const pdf = new jsPDF();
+          const imgProps = pdf.getImageProperties(imgData);
+          const pdfWidth = pdf.internal.pageSize.getWidth();
+          const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+          pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+          pdf.save("estimativa_rescisao_dr_andre_lima.pdf");
+        });
+      }
+
+      // Eventos
+      window.addEventListener("load", () => {
+        updateUIforType(tipoDesligamentoSelect.value);
+        updateFGTSFields();
+      });
+
+      tipoDesligamentoSelect.addEventListener("change", (e) =>
+        updateUIforType(e.target.value)
+      );
+      fgtsOptionSelect.addEventListener("change", updateFGTSFields);
+
+      // Mascaramento de inputs
+      $$(".currency").forEach((input) => {
+        input.addEventListener("input", (e) => {
+          let value = e.target.value.replace(/\D/g, "");
+          if (value) {
+            value = (parseFloat(value) / 100).toFixed(2).replace(".", ",");
+            value = value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+            e.target.value = value;
+          } else {
+            e.target.value = "0,00";
+          }
+        });
+      });
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // Reúne dados do formulário
+        const formData = {
+          tipoDesligamento: tipoDesligamentoSelect.value,
+          salarioBase: parseCurrency($("#salarioBase").value),
+          dataAdmissao: $("#dataAdmissao").value,
+          dataDesligamento: $("#dataDesligamento").value,
+          avisoModelo: $("#avisoModelo").value,
+          faltasDescontos: parseCurrency($("#faltasDescontos").value),
+          feriasVencidas: $("#feriasVencidas").checked,
+          fgtsOption: fgtsOptionSelect.value,
+          fgtsSaldo: parseCurrency($("#fgtsSaldo").value),
+          // Campos avançados removidos
+        };
+
+        // Executa o cálculo e renderiza
+        const resultado = calcRescisao(formData);
+        renderResult(resultado);
+
+        scenarioComparisonSection.style.display = "none";
+      });
+
+      compareBtn.addEventListener("click", () => {
+        const formData = {
+          salarioBase: parseCurrency($("#salarioBase").value),
+          dataAdmissao: $("#dataAdmissao").value,
+          dataDesligamento: $("#dataDesligamento").value,
+          faltasDescontos: parseCurrency($("#faltasDescontos").value),
+          feriasVencidas: $("#feriasVencidas").checked,
+          fgtsOption: fgtsOptionSelect.value,
+          fgtsSaldo: parseCurrency($("#fgtsSaldo").value),
+        };
+
+        const scenarios = [
+          "sem-justa-causa",
+          "pedido-demissao",
+          "justa-causa",
+          "acordo",
+        ];
+        comparisonTableBody.innerHTML = "";
+
+        const results = scenarios.map((tipo) => {
+          const scenarioData = {
+            ...formData,
+            tipoDesligamento: tipo,
+            avisoModelo: "indenizado",
+          };
+          if (tipo === "pedido-demissao")
+            scenarioData.avisoModelo = "nao-cumprido";
+          return calcRescisao(scenarioData);
+        });
+
+        // Cria as linhas do comparativo
+        const totalBrutoRow = document.createElement("tr");
+        totalBrutoRow.innerHTML = `<td>Total Bruto</td>${results
+          .map((r) => `<td>${formatCurrency(r.bruto)}</td>`)
+          .join("")}`;
+        comparisonTableBody.appendChild(totalBrutoRow);
+
+        const totalDescontosRow = document.createElement("tr");
+        totalDescontosRow.innerHTML = `<td>Total Descontos</td>${results
+          .map((r) => `<td>${formatCurrency(r.descontos)}</td>`)
+          .join("")}`;
+        comparisonTableBody.appendChild(totalDescontosRow);
+
+        const totalLiquidoRow = document.createElement("tr");
+        totalLiquidoRow.innerHTML = `<td><strong>Líquido a Receber</strong></td>${results
+          .map((r) => `<td><strong>${formatCurrency(r.liquido)}</strong></td>`)
+          .join("")}`;
+        comparisonTableBody.appendChild(totalLiquidoRow);
+
+        scenarioComparisonSection.style.display = "block";
+        resultSection.style.display = "none";
+        scenarioComparisonSection.scrollIntoView({ behavior: "smooth" });
+      });
+
+      limparBtn.addEventListener("click", () => {
+        form.reset();
+
+        // Restaurar valores padrão
+        $("#salarioBase").value = "1518,00";
+        $("#dataAdmissao").value = "2024-01-15";
+        $("#dataDesligamento").value = "2024-08-28";
+        $("#fgtsSaldo").value = "5000,00";
+        $("#faltasDescontos").value = "0,00";
+
+        // Resetar visibilidade dos campos
+        updateUIforType(tipoDesligamentoSelect.value);
+        updateFGTSFields();
+
+        // Esconder seções de resultado
+        resultSection.style.display = "none";
+        scenarioComparisonSection.style.display = "none";
+      });
+
+      pdfBtn.addEventListener("click", () => exportToPDF());
+    </script>
+  </body>
+</html>
