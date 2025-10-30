@@ -801,10 +801,10 @@
           avisoPrevio: true,
           fgtsSaque: true,
           seguroDesemprego: true,
-          avisoDesconta: false,
+          avisoDesconta: true,
           decimoTerceiro: true,
           feriasProporcionais: true,
-          feriasVencidas: true,
+          feriasVencidas: true, // CORREÇÃO: Permite desconto
         },
         "pedido-demissao": {
           multaFgts: 0.0,
@@ -920,55 +920,100 @@
       }
 
       function calcSalarioSaldo(salario, dataDesligamento) {
-        const diasNoMes = new Date(
-          dataDesligamento.getFullYear(),
-          dataDesligamento.getMonth() + 1,
-          0
-        ).getDate();
+        const diasNoMes = 30; // CORREÇÃO: Salário mensalista é sempre dividido por 30
         const diasTrabalhados = dataDesligamento.getDate();
         return (salario / diasNoMes) * diasTrabalhados;
       }
 
-      function calcAvisoPrevio(salarioBase, dataAdmissao, dataDesligamento) {
-        const salarioComMedias = salarioBase; // Simplificado: sem médias
+      // FUNÇÃO ADICIONADA: Retorna os dias de aviso
+      function getDiasAviso(dataAdmissao, dataDesligamento) {
         const anosCompletos = getAnosCompletos(dataAdmissao, dataDesligamento);
-        const diasAviso = 30 + Math.min(60, anosCompletos * 3); // Limite de 90 dias
+        return 30 + Math.min(60, anosCompletos * 3); // Limite de 90 dias
+      }
 
+      // FUNÇÃO ATUALIZADA: Calcula o valor do aviso com base nos dias
+      function calcAvisoPrevio(salarioBase, diasAviso) {
+        const salarioComMedias = salarioBase; // Simplificado: sem médias
         return (salarioComMedias / 30) * diasAviso;
       }
 
-      function calcDecimoTerceiro(salarioBase, dataDesligamento) {
-        const salarioComMedias = salarioBase; // Simplificado: sem médias
-        let mesesProporcionais = dataDesligamento.getMonth() + 1; // Mês atual
+      // FUNÇÃO CORRIGIDA: Cálculo de 13º com projeção e ano civil
+      function calcDecimoTerceiro(salarioBase, dataAdmissao, dataFinal) {
+        const salarioComMedias = salarioBase;
+        const anoDesligamento = dataFinal.getFullYear();
+        const diaDesligamento = dataFinal.getDate();
+        const mesDesligamento = dataFinal.getMonth(); // 0-11
 
-        // Verifica se trabalhou 15 dias no mês de desligamento
-        const diaDesligamento = dataDesligamento.getDate();
-        if (diaDesligamento < 15) {
-          mesesProporcionais--;
+        // Define o início da contagem (ou 1º de Jan, ou data de admissão se for no mesmo ano)
+        let dataInicioContagem =
+          dataAdmissao.getFullYear() < anoDesligamento
+            ? new Date(anoDesligamento, 0, 1)
+            : dataAdmissao;
+
+        const diaInicio = dataInicioContagem.getDate();
+        const mesInicio = dataInicioContagem.getMonth();
+
+        let avos = 0;
+
+        // Loop pelos meses do ano
+        for (let m = mesInicio; m <= mesDesligamento; m++) {
+          // Se for o primeiro mês (mês de admissão/início do ano)
+          if (m === mesInicio && diaInicio > 15) {
+            continue; // Não conta o primeiro mês se começou depois do dia 15
+          }
+
+          // Se for o último mês (mês de desligamento)
+          if (m === mesDesligamento && diaDesligamento < 15) {
+            continue; // Não conta o último mês se terminou antes do dia 15
+          }
+
+          avos++;
         }
 
-        return (salarioComMedias / 12) * mesesProporcionais;
+        avos = Math.max(0, avos);
+        avos = Math.min(avos, 12);
+
+        return (salarioComMedias / 12) * avos;
       }
 
-      function calcFeriasProporcionais(
-        salarioBase,
-        dataAdmissao,
-        dataDesligamento
-      ) {
+      // FUNÇÃO CORRIGIDA: Cálculo de Férias com projeção e período aquisitivo
+      function calcFeriasProporcionais(salarioBase, dataAdmissao, dataFinal) {
         const salarioComMedias = salarioBase; // Simplificado: sem médias
-        const d1 = new Date(dataAdmissao);
-        const d2 = new Date(dataDesligamento);
 
-        let mesesTrabalhados =
-          (d2.getFullYear() - d1.getFullYear()) * 12 +
-          (d2.getMonth() - d1.getMonth());
-        if (d2.getDate() >= 15) {
-          mesesTrabalhados++;
+        // Encontra o início do último período aquisitivo
+        let ultimoAniversario = new Date(dataAdmissao);
+        while (ultimoAniversario <= dataFinal) {
+          // CORREÇÃO: Usar dataFinal aqui
+          // Avança um ano
+          let proximoAniversario = new Date(ultimoAniversario);
+          proximoAniversario.setFullYear(proximoAniversario.getFullYear() + 1);
+
+          // Se o próximo aniversário já passou da data final, o último é o que queremos
+          if (proximoAniversario > dataFinal) {
+            // CORREÇÃO: Usar dataFinal aqui
+            break;
+          }
+          ultimoAniversario = proximoAniversario;
         }
 
-        const mesesAquisitivosIncompletos = mesesTrabalhados % 12;
+        const dataInicioContagem = ultimoAniversario;
 
-        return (salarioComMedias / 12) * mesesAquisitivosIncompletos * (4 / 3);
+        // Lógica de contagem de meses corridos para férias
+        let mesesTotais =
+          (dataFinal.getFullYear() - dataInicioContagem.getFullYear()) * 12 +
+          (dataFinal.getMonth() - dataInicioContagem.getMonth());
+
+        if (dataInicioContagem.getDate() > 15) {
+          mesesTotais--; // Se começou depois do dia 15, perde o primeiro avo.
+        }
+
+        if (dataFinal.getDate() >= 15) {
+          mesesTotais++; // Se terminou dia 15 ou depois, ganha o último avo.
+        }
+
+        const avos = mesesTotais % 12; // Pega só o proporcional do último período
+
+        return (salarioComMedias / 12) * avos * (4 / 3); // 4/3 = 1 + 1/3
       }
 
       function calcFeriasVencidas(salarioBase) {
@@ -1027,7 +1072,7 @@
         return Math.max(0, irrfValor);
       }
 
-      // Função principal que agrega todos os cálculos
+      // FUNÇÃO ATUALIZADA: Função principal que agrega todos os cálculos
       function calcRescisao(data) {
         const {
           tipoDesligamento,
@@ -1061,7 +1106,25 @@
             "Em até 10 dias corridos contados do término do contrato.",
         };
 
-        let decimoTerceiro = 0;
+        // CÁLCULO DA PROJEÇÃO DO AVISO PRÉVIO
+        const diasAviso = getDiasAviso(admissao, desligamento);
+        let dataFinalProjetada = new Date(desligamento);
+
+        // CORREÇÃO: Projeta o aviso se for INDENIZADO ou TRABALHADO
+        if (
+          regras.avisoPrevio &&
+          (avisoModelo === "indenizado" || avisoModelo === "trabalhado")
+        ) {
+          dataFinalProjetada.setDate(dataFinalProjetada.getDate() + diasAviso);
+        }
+
+        let decimoTerceiroProporcional = 0;
+        let decimoTerceiroTotal = 0;
+        let decimoTerceiroAviso = 0;
+
+        let feriasProporcionais = 0;
+        let feriasTotais = 0;
+        let feriasAviso = 0;
 
         // 1. Saldo de Salário
         const saldoSalario = calcSalarioSaldo(salarioBase, desligamento);
@@ -1073,25 +1136,30 @@
         bruto += saldoSalario;
 
         // 2. Aviso Prévio
-        const avisoPrevioValor = calcAvisoPrevio(
+        // CORREÇÃO: Calcula os dois tipos de aviso (Proporcional para pagar, 30 dias para descontar)
+        const diasAvisoProporcional = getDiasAviso(admissao, desligamento); // Dias para INDENIZADO/TRABALHADO
+        const avisoPrevioValorProporcional = calcAvisoPrevio(
           salarioBase,
-          admissao,
-          desligamento
-        );
+          diasAvisoProporcional
+        ); // Valor para INDENIZADO/TRABALHADO
+
+        // Valor do aviso de 30 dias (para desconto)
+        const avisoPrevioValor30Dias = calcAvisoPrevio(salarioBase, 30);
+
         if (regras.avisoPrevio) {
           if (avisoModelo === "indenizado") {
             if (regras.aviso50p) {
               verbas["Aviso Prévio Indenizado (50%)"] = {
-                valor: avisoPrevioValor / 2,
+                valor: avisoPrevioValorProporcional / 2,
                 formula: "50% do valor do aviso (Acordo)",
               };
-              bruto += avisoPrevioValor / 2;
+              bruto += avisoPrevioValorProporcional / 2;
             } else {
               verbas["Aviso Prévio Indenizado"] = {
-                valor: avisoPrevioValor,
-                formula: "Valor do aviso prévio indenizado",
+                valor: avisoPrevioValorProporcional,
+                formula: `${diasAvisoProporcional} dias de aviso prévio`,
               };
-              bruto += avisoPrevioValor;
+              bruto += avisoPrevioValorProporcional;
             }
           } else if (avisoModelo === "trabalhado") {
             verbas["Aviso Prévio Trabalhado"] = {
@@ -1099,25 +1167,53 @@
               formula: "Aviso cumprido e pago no saldo final",
             };
           } else if (avisoModelo === "nao-cumprido" && regras.avisoDesconta) {
+            // CORREÇÃO: Desconto é sobre 30 dias, não o proporcional
             verbas["Aviso Prévio (Desconto)"] = {
-              valor: -avisoPrevioValor,
-              formula: "Desconto por não cumprimento (Pedido de Demissão)",
-            };
-            descontos += avisoPrevioValor;
+              valor: -avisoPrevioValor30Dias,
+              formula: "Desconto de 30 dias (Aviso não cumprido)",
+            }; // CORREÇÃO: Texto genérico
+            descontos += avisoPrevioValor30Dias;
           }
         }
 
-        // 3. 13º Salário
+        // 3. 13º Salário (Separado)
         if (regras.decimoTerceiro) {
-          decimoTerceiro = calcDecimoTerceiro(salarioBase, desligamento);
+          // Calcula o 13º proporcional até a data de demissão
+          decimoTerceiroProporcional = calcDecimoTerceiro(
+            salarioBase,
+            admissao,
+            desligamento
+          );
           verbas["13º Salário Proporcional"] = {
-            valor: decimoTerceiro,
+            valor: decimoTerceiroProporcional,
             formula: "Proporcional aos meses trabalhados no ano",
           };
-          bruto += decimoTerceiro;
+          bruto += decimoTerceiroProporcional;
+
+          // Calcula o 13º TOTAL (com projeção) e subtrai para achar o AVO DO AVISO
+          if (
+            regras.avisoPrevio &&
+            (avisoModelo === "indenizado" || avisoModelo === "trabalhado")
+          ) {
+            decimoTerceiroTotal = calcDecimoTerceiro(
+              salarioBase,
+              admissao,
+              dataFinalProjetada
+            );
+            decimoTerceiroAviso =
+              decimoTerceiroTotal - decimoTerceiroProporcional;
+
+            if (decimoTerceiroAviso > 0) {
+              verbas["13º Salário (Aviso Prévio)"] = {
+                valor: decimoTerceiroAviso,
+                formula: "Avos referentes à projeção do aviso",
+              };
+              bruto += decimoTerceiroAviso;
+            }
+          }
         }
 
-        // 4. Férias
+        // 4. Férias (Separadas)
         if (feriasVencidas && regras.feriasVencidas) {
           const feriasVencidasValor = calcFeriasVencidas(salarioBase);
           verbas["Férias Vencidas + 1/3"] = {
@@ -1128,21 +1224,43 @@
         }
 
         if (regras.feriasProporcionais) {
-          const feriasProporcionais = calcFeriasProporcionais(
+          // Calcula as Férias proporcionais até a data de demissão
+          feriasProporcionais = calcFeriasProporcionais(
             salarioBase,
             admissao,
             desligamento
           );
           verbas["Férias Proporcionais + 1/3"] = {
             valor: feriasProporcionais,
-            formula: "Proporcional ao período aquisitivo incompleto",
+            formula: "Proporcional ao período aquisitivo",
           };
           bruto += feriasProporcionais;
+
+          // Calcula as Férias TOTAIS (com projeção) e subtrai para achar o AVO DO AVISO
+          if (
+            regras.avisoPrevio &&
+            (avisoModelo === "indenizado" || avisoModelo === "trabalhado")
+          ) {
+            feriasTotais = calcFeriasProporcionais(
+              salarioBase,
+              admissao,
+              dataFinalProjetada
+            );
+            feriasAviso = feriasTotais - feriasProporcionais;
+
+            if (feriasAviso > 0) {
+              verbas["Férias (Aviso Prévio) + 1/3"] = {
+                valor: feriasAviso,
+                formula: "Avos referentes à projeção do aviso",
+              };
+              bruto += feriasAviso;
+            }
+          }
         }
 
         // 5. FGTS e Multa
         const mesesTrabalhadosTotal =
-          getMonthsWorked(admissao, desligamento) + 1; // +1 para o mês da rescisão
+          getMonthsWorked(admissao, dataFinalProjetada) + 1; // Usa data projetada
         const fgtsSaldoCalculado = calcFgtsSaldo(
           fgtsOption,
           fgtsSaldo,
@@ -1166,7 +1284,8 @@
         // 6. Descontos
         const baseINSS = saldoSalario;
         const inssValor = calcINSS(baseINSS);
-        const baseINSS13 = decimoTerceiro;
+        // CORREÇÃO: INSS do 13º incide sobre o valor total (proporcional + aviso)
+        const baseINSS13 = decimoTerceiroProporcional + decimoTerceiroAviso;
         const inssValor13 = calcINSS(baseINSS13);
 
         const inssTotal = inssValor + inssValor13;
