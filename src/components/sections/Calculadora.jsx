@@ -14,7 +14,7 @@ export default function Calculadora({ colorMode }) {
   const bgClasses = {
     dark: "bg-bgSectionOpacityDark",
     light: "bg-bgSectionOpacityLight",
-    default: "bg-bgSectionDark",
+    default: "bg-black",
   };
   const textClasses = {
     dark: "text-white",
@@ -26,7 +26,7 @@ export default function Calculadora({ colorMode }) {
 
   return (
     <>
-      <SectionArea id="Calculadora" className={`${bgClass}`}>
+      <SectionArea id="Calculadora" className={`${bgClass}`} paddingtop={false}>
         <SectionWrapper className="flex justify-center">
           <SectionHeader
             colorMode="dark"
