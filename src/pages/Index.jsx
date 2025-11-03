@@ -31,6 +31,7 @@ export default function Index() {
         influencer={false}
         mesclado={false}
       />
+      <CalculadoraRescisao />
       {/* <BlogPosts /> */}
       <Features
         colorMode={colorMode}
@@ -48,7 +49,7 @@ export default function Index() {
         socialPrint={true}
       />
       <Cta colorMode={colorMode} />
-      <CalculadoraRescisao />
+
       <Steps colorMode={colorMode} />
       {/* <Maps colorMode={colorMode} /> */}
       <Faq colorMode={colorMode} />
