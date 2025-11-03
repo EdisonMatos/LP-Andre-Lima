@@ -14,12 +14,12 @@ export default function Calculadora({ colorMode }) {
   const bgClasses = {
     dark: "bg-bgSectionOpacityDark",
     light: "bg-bgSectionOpacityLight",
-    default: "squares",
+    default: "bg-bgSectionDark",
   };
   const textClasses = {
     dark: "text-white",
     light: "text-black",
-    default: "text-black",
+    default: "text-white",
   };
   const bgClass = bgClasses[colorMode] || bgClasses.default;
   const titleColor = textClasses[colorMode] || textClasses.default;
@@ -27,19 +27,19 @@ export default function Calculadora({ colorMode }) {
   return (
     <>
       <SectionArea id="Calculadora" className={`${bgClass}`}>
-        <SectionHeader
-          colorMode="dark"
-          className="text-center"
-          miniTitle={content.texts.calc.miniTag}
-          sectionHeaderTitle={content.texts.calc.title}
-          sectionHeaderSubtitle={content.texts.calc.subtitle}
-          color=""
-          titleColorSet={titleColor}
-          subtitleColorSet={titleColor}
-          miniTitleBgColor="bg-minititle"
-          miniTitleTextColor="text-darker"
-        />
         <SectionWrapper className="flex justify-center">
+          <SectionHeader
+            colorMode="dark"
+            className="text-center"
+            miniTitle={content.texts.calc.miniTag}
+            sectionHeaderTitle={content.texts.calc.title}
+            sectionHeaderSubtitle={content.texts.calc.subtitle}
+            color=""
+            titleColorSet={titleColor}
+            subtitleColorSet={titleColor}
+            miniTitleBgColor="bg-minititle"
+            miniTitleTextColor="text-darker"
+          />
           <MotionDivDownToUp>
             <Button
               label={content.texts.calc.labelButton}
