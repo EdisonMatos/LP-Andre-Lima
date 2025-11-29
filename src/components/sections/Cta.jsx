@@ -25,7 +25,7 @@ export default function Cta({ colorMode = "default" }) {
 
   return (
     <>
-      <SectionArea className={`${bgClass}`} paddingbot={false}>
+      <SectionArea className={`${bgClass}`}>
         <SectionWrapper>
           <SectionHeader
             colorMode="dark"
